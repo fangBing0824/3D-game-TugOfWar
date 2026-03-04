@@ -1,0 +1,38 @@
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aframe-extras@7.6.0/dist/aframe-extras.min.js"></script>
+    <script src="script.js"></script>
+  </head>
+
+  <body>
+    <a-scene cursor="rayOrigin: mouse" raycaster="objects: .clickable">
+      
+      <a-assets>
+        <a-asset-item id="tugOfWar" src="squid_game_tug_of_war/scene.gltf"></a-asset-item>
+      </a-assets>
+
+      <!-- Add Camera -->
+
+      <div class="game-info">
+        <div id="time-display">Time: 50</div>
+        
+      </div>
+      
+       <!-- Light -->
+      <a-light type="directional" intensity="1" position="2 4 2"></a-light>
+      <a-light type="ambient" intensity="0.6"></a-light>
+
+      <!-- Center Line -->
+      
+
+      <!-- Tug of War Model -->
+      
+      <a-entity position="0 0 -25" rotation="0 90 0">
+        <a-gltf-model src="#tugOfWar"></a-gltf-model>
+      </a-entity>
+
+      
+    </a-scene>
+  </body>
+</html>
