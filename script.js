@@ -44,7 +44,7 @@ window.addEventListener('DOMContentLoaded', function() {
     function number(){
         if (gameOver) return;
 
-        currentNumber = Math.floor(Math.random() * 10) + 1;
+        currentNumber = Math.floor(Math.random() * 9) + 1;
 
         numberDisplay.textContent = "Press: " + currentNumber;
     }
@@ -91,7 +91,7 @@ window.addEventListener('DOMContentLoaded', function() {
        
     }
 
-    setInterval(autoPull, 2000); // 每2秒拉一次
+    setInterval(autoPull, 2000); 
     
 
 });
