@@ -15,11 +15,48 @@ window.addEventListener('DOMContentLoaded', function() {
 
     let currentNumber = null;
 
+    let bgMusic = document.getElementById("bgMusic");
+    let loseSound = document.getElementById("loseSound");
+    let winSound = document.getElementById("winSound");
+
+    if (bgMusic) {
+    bgMusic.loop = true;
+    bgMusic.volume = 0.3;
+
+    
+    bgMusic.play().catch(() => {
+        console.log("Autoplay blocked");
+    });
+}
+
 
     function endGame(message) {
-        gameOver = true;
-        alert(message);
+    gameOver = true;
+
+    // 🎵 停止背景音乐
+    let bgMusic = document.getElementById("bgMusic");
+    if (bgMusic) {
+        bgMusic.pause();
     }
+
+    // 😱 
+    if (message.includes("LOSE")) {
+        if (loseSound) {
+            loseSound.currentTime = 0;
+            loseSound.play();
+        }
+    }
+
+    // 🎉 
+    if (message.includes("WIN")) {
+        if (winSound) {
+            winSound.currentTime = 0;
+            winSound.play();
+        }
+    }
+
+    alert(message);
+}
 
 // Timer function
     function countdown() {
@@ -36,6 +73,10 @@ window.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
+        if (t < 10 && bgMusic) {
+            bgMusic.volume = 0.7; 
+}
+
         timeoutId = setTimeout(countdown, 1000);
     }
 
@@ -51,8 +92,15 @@ window.addEventListener('DOMContentLoaded', function() {
 
     number();
 
+    let musicStarted = false;
+
      document.addEventListener("keydown", function (event) {
         if (gameOver) return;
+
+         if (!musicStarted && bgMusic) {
+            bgMusic.play();
+            musicStarted = true;
+    }
 
         let playerInput = parseInt(event.key);
 
@@ -87,6 +135,10 @@ window.addEventListener('DOMContentLoaded', function() {
 
         if (cameraPositionZ <= -17) endGame("YOU LOSE!");
         if (ropePosition >= -5) endGame("YOU WIN!");
+
+        if (cameraPositionZ < -10 && bgMusic) {
+            bgMusic.volume = 1.0;
+}
        
        
     }
